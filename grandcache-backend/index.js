@@ -2,29 +2,19 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const cors = require('cors');
-const connection = require('./db');
+
+//Rutas
+const usuarioRoutes = require('./routes/usuarioRoutes');
 
 app.use(express.json());
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.send("¡Servidor de Grand Cache funcionando correctamente!")
+  res.send("Servidor de GrandCache funcionando correctamente")
 });
 
-app.get('/api/test', (req, res) => {
-  const sql = 'SELECT * FROM productos';
-
-  connection.query(sql, (err, results) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send('Error al traer los datos');
-    }
-    res.json({
-      mensaje: 'Exito al traer los datos',
-      datos: results
-    });
-  });
-});
+//Conexión de rutas
+app.use('/api/usuarios', usuarioRoutes);
 
 app.listen(port, () => {
   console.log("Servidor corriendo en el puerto " + port);

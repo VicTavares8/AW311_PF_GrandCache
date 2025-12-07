@@ -1,19 +1,17 @@
 const mysql = require('mysql2');
 
-const connection = mysql.createConnection({
+const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: 'Eltorito_88',
-  database: 'grandcache_db'
+  database: 'grandcache_db',
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
-connection.connect((err)=>{
-  if (err) {
-    console.error('Error conectando a MySQL', err);
-    return;
-  }
-  console.log('Conectado a MySQL');
-});
+const promisePool = pool.promise();
+console.log('Configuración de BD cargada.');
 
-module.exports = connection;
+module.exports = promisePool;
 
