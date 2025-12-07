@@ -1,0 +1,86 @@
+// --- VARIABLES DE COLORES (Paleta Fresca) ---
+$primary-color: #0d6efd; // Azul standard o el que prefieras
+$active-bg: #e6f6ec;     // El fondo verde sutil de la imagen
+$active-text: #0f5132;   // El texto verde oscuro
+$hover-bg: #f8f9fa;      // Gris muy suave para hover
+$avatar-bg: #e9ecef;     // Gris del círculo de usuario
+$logo-bg: #198754;       // Verde del logo
+
+// --- ESTILOS DE LA NAVBAR ---
+.navbar {
+  height: 70px; // Altura fija para consistencia
+  background-color: #ffffff !important;
+
+  // Icono del Logo
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    background-color: $logo-bg;
+    font-size: 1.1rem;
+  }
+}
+
+// --- NAVEGACIÓN CENTRAL (PÍLDORAS) ---
+.custom-nav {
+  .nav-link {
+    color: #555; // Gris oscuro por defecto
+    font-weight: 500;
+    font-size: 0.95rem;
+    border-radius: 8px; // Bordes redondeados
+    transition: all 0.2s ease-in-out; // Suavidad al pasar el mouse
+
+    // Efecto Hover (Cuando pasas el mouse pero no es click)
+    &:hover {
+      background-color: $hover-bg;
+      color: #000;
+      transform: translateY(-1px); // Pequeño levantamiento "mágico"
+    }
+
+    // ESTADO ACTIVO (La magia que pediste)
+    // Esta clase se aplica automáticamente gracias a routerLinkActive="active-pill"
+    &.active-pill {
+      background-color: $active-bg;
+      color: $active-text;
+      font-weight: 600;
+    }
+  }
+}
+
+// --- SECCIÓN DE USUARIO (DERECHA) ---
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  background-color: $avatar-bg;
+  color: #495057;
+  border-radius: 50%; // Círculo perfecto
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: darken($avatar-bg, 5%);
+  }
+}
+
+// --- RESPONSIVE (CELULARES) ---
+@media (max-width: 991px) {
+  .navbar {
+    height: auto; // En móvil la altura es dinámica
+    padding-bottom: 1rem;
+  }
+
+  // En móvil, centramos los items y quitamos la altura fija
+  .custom-nav {
+    margin-top: 1rem;
+    text-align: center;
+
+    .nav-link {
+      display: inline-block; // Para que el fondo no ocupe todo el ancho
+      width: 100%;
+    }
+  }
+
+  .user-section {
+    margin-top: 1rem;
+    justify-content: center !important; // Centrar usuario en móvil también
+  }
+}

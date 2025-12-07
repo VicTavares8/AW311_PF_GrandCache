@@ -1,4 +1,4 @@
-// Importamos la conexión a la BD que acabamos de configurar
+// Importamos la conexión a la BD
 const db = require('../db');
 
 // GET ALL USUARIOS
@@ -17,7 +17,7 @@ exports.createUsuario = async (req, res) => {
     const { nombre_usuario, password, nombre_completo, rol } = req.body;
 
     if (!nombre_usuario || !password) {
-        return res.status(400).json({ message: 'El nombre de usuario y una contraseña son necesarios.' });
+        return res.status(400).json({ message: 'El nombre de usuario y una contraseña son requeridos.' });
     }
 
     try {

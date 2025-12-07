@@ -1,1 +1,55 @@
-<p>navbar works!</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top">
+  <div class="container-fluid px-4">
+
+    <a class="navbar-brand d-flex align-items-center gap-2 fw-semibold text-dark" routerLink="/dashboard">
+      <div class="logo-icon d-flex align-items-center justify-content-center text-white rounded-2">
+        <i class="bi bi-box-seam"></i> ⚡
+      </div>
+      <span>GrandCache</span>
+    </a>
+
+    <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-1 custom-nav">
+
+        <li class="nav-item">
+          <a class="nav-link px-3" routerLink="/dashboard" routerLinkActive="active-pill">
+            Dashboard
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link px-3" routerLink="/inventario" routerLinkActive="active-pill">
+            Inventario
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link px-3" routerLink="/administracion" routerLinkActive="active-pill">
+            Administracion
+          </a>
+        </li>
+
+      </ul>
+
+      <div class="d-flex align-items-center justify-content-end user-section">
+        <div class="dropdown">
+          <a class="d-flex align-items-center justify-content-center text-decoration-none user-avatar fw-bold"
+             href="#" role="button" data-bs-toggle="dropdown">
+            VT
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 mt-2">
+            <li><span class="dropdown-header text-muted small">Vic Admin</span></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger small" routerLink="/login">Cerrar Sesión</a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</nav>

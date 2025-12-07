@@ -5,6 +5,10 @@ const cors = require('cors');
 
 //Rutas
 const usuarioRoutes = require('./routes/usuarioRoutes');
+const categoriaRoutes = require('./routes/categoriaRoutes');
+const proveedorRoutes = require('./routes/proveedorRoutes');
+const productoRoutes = require('./routes/productoRoutes');
+const movimientoRoutes = require('./routes/movimientoRoutes');
 
 app.use(express.json());
 app.use(cors());
@@ -15,6 +19,10 @@ app.get("/", (req, res) => {
 
 //Conexión de rutas
 app.use('/api/usuarios', usuarioRoutes);
+app.use('/api/categorias', categoriaRoutes);
+app.use('/api/proveedores', proveedorRoutes);
+app.use('/api/productos', productoRoutes);
+app.use('/api/movimientos', movimientoRoutes);
 
 app.listen(port, () => {
   console.log("Servidor corriendo en el puerto " + port);
