@@ -26,9 +26,11 @@
     <div class="card shadow-sm border-0">
       <div class="table-responsive">
         <table class="table table-hover align-middle mb-0">
+
           <thead class="bg-light text-secondary small text-uppercase">
             <tr>
-              <th class="ps-4 py-3">Producto</th>
+              <th class="ps-4 py-3">ID</th>
+              <th class="py-3">Producto</th>
               <th>Categoría</th>
               <th>Proveedor</th>
               <th>Precio</th>
@@ -36,11 +38,16 @@
               <th class="text-end pe-4">Acciones</th>
             </tr>
           </thead>
+
           <tbody>
             @for (prod of productos(); track prod.id) {
               <tr>
-                <td class="ps-4">
-                  <div class="d-flex align-items-center">
+
+                <td class="ps-4 fw-bold text-muted">
+                  #{{ prod.id }}
+                </td>
+
+                <td> <div class="d-flex align-items-center">
                     <div class="bg-light rounded p-2 me-3 text-primary d-flex align-items-center justify-content-center"
                          style="width: 40px; height: 40px;">
                       <i class="bi bi-box-seam"></i>
@@ -87,6 +94,7 @@
                     <i class="bi bi-arrow-left-right"></i>
                   </button>
                 </td>
+
               </tr>
             }
           </tbody>

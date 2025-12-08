@@ -1,1 +1,113 @@
-<p>movimientos works!</p>
+<div class="container fade-in">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold text-dark">Control de Stock (Kardex)</h3>
+    <span class="badge bg-secondary rounded-pill">{{ movimientos().length }} Movimientos</span>
+  </div>
+
+  <div class="card shadow-sm border-0 mb-5">
+    <div class="card-header bg-white border-bottom py-3">
+      <h5 class="card-title mb-0 text-primary fw-bold">
+        <i class="bi bi-arrow-left-right me-2"></i>Registrar Entrada / Salida
+      </h5>
+    </div>
+    <div class="card-body p-4">
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div class="row g-3 align-items-end">
+
+          <div class="col-md-5">
+            <label class="form-label fw-bold small text-muted">Producto</label>
+            <select class="form-select" name="id_producto" [(ngModel)]="model.id_producto" required>
+              <option [value]="0" disabled>Selecciona un producto...</option>
+              @for (prod of productos(); track prod.id) {
+                <option [value]="prod.id">
+                   #{{ prod.id }} - {{ prod.nombre }} (Stock: {{ prod.stock }})
+                </option>
+              }
+            </select>
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label fw-bold small text-muted">Tipo Operación</label>
+            <select class="form-select fw-bold" name="tipo" [(ngModel)]="model.tipo"
+                    [class.text-success]="model.tipo == 'IN'"
+                    [class.text-danger]="model.tipo == 'OUT'">
+              <option value="IN" class="text-success fw-bold"> + ENTRADA (Suma)</option>
+              <option value="OUT" class="text-danger fw-bold"> - SALIDA (Resta)</option>
+            </select>
+          </div>
+
+          <div class="col-md-2">
+            <label class="form-label fw-bold small text-muted">Cantidad</label>
+            <input type="number" class="form-control" name="cantidad"
+                   [(ngModel)]="model.cantidad" required min="1" placeholder="0">
+          </div>
+
+          <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100 fw-bold" [disabled]="f.invalid">
+              Registrar
+            </button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <h4 class="mb-3 fw-bold text-secondary">Historial de Operaciones</h4>
+
+  @if (cargando()) {
+    <div class="text-center py-4">
+      <div class="spinner-border text-primary" role="status"></div>
+    </div>
+  }
+
+  @if (!cargando() && movimientos().length > 0) {
+    <div class="table-responsive shadow-sm rounded-3">
+      <table class="table table-hover align-middle mb-0 bg-white">
+        <thead class="bg-light">
+          <tr>
+            <th class="ps-4">Fecha/Hora</th>
+            <th>Producto</th>
+            <th>Tipo</th>
+            <th>Cantidad</th>
+            <th>Usuario Responsable</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (mov of movimientos(); track mov.id) {
+            <tr>
+              <td class="ps-4 text-muted small">
+                {{ mov.fecha_hora | date:'short' }}
+              </td>
+
+              <td class="fw-bold text-dark">{{ mov.nombre_producto }}</td>
+
+              <td>
+                @if (mov.tipo === 'IN') {
+                  <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-10 rounded-pill">
+                    <i class="bi bi-arrow-up-short me-1"></i>ENTRADA
+                  </span>
+                } @else {
+                  <span class="badge bg-danger bg-opacity-10 text-danger border border-danger border-opacity-10 rounded-pill">
+                    <i class="bi bi-arrow-down-short me-1"></i>SALIDA
+                  </span>
+                }
+              </td>
+
+              <td class="fw-bold fs-6">{{ mov.cantidad }}</td>
+
+              <td class="text-muted small">
+                <i class="bi bi-person-circle me-1"></i>{{ mov.nombre_usuario }}
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  } @else if (!cargando()) {
+    <div class="alert alert-light text-center border">
+      No hay movimientos registrados aún.
+    </div>
+  }
+</div>
