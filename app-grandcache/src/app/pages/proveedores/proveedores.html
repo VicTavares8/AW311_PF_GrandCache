@@ -1,1 +1,72 @@
-<p>proveedores works!</p>
+<div class="container fade-in">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold text-dark">Gestión de Proveedores</h3>
+    <span class="badge bg-info text-dark rounded-pill">{{ proveedores().length }} Registrados</span>
+  </div>
+
+  <div class="card shadow-sm border-0 mb-5">
+    <div class="card-header bg-white border-bottom py-3">
+      <h5 class="card-title mb-0 text-info fw-bold">
+        <i class="bi bi-truck me-2"></i>Nuevo Proveedor
+      </h5>
+    </div>
+    <div class="card-body p-4">
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div class="row g-3">
+
+          <div class="col-md-4">
+            <label class="form-label fw-bold small text-muted">Empresa</label>
+            <input type="text" class="form-control" name="empresa"
+                   [(ngModel)]="model.empresa" required placeholder="Ej: Samsung Electronics">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label fw-bold small text-muted">Email Contacto</label>
+            <input type="email" class="form-control" name="email_contacto"
+                   [(ngModel)]="model.email_contacto" placeholder="contacto@empresa.com">
+          </div>
+
+          <div class="col-md-2">
+            <label class="form-label fw-bold small text-muted">Teléfono</label>
+            <input type="text" class="form-control" name="telefono"
+                   [(ngModel)]="model.telefono" placeholder="555-0000">
+          </div>
+
+          <div class="col-md-2 d-flex align-items-end">
+            <button type="submit" class="btn btn-info w-100 fw-bold text-white" [disabled]="f.invalid">
+              Guardar
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <h4 class="mb-3 fw-bold text-secondary">Directorio</h4>
+
+  @if (!cargando() && proveedores().length > 0) {
+    <div class="table-responsive shadow-sm rounded-3">
+      <table class="table table-hover align-middle mb-0 bg-white">
+        <thead class="bg-light">
+          <tr>
+            <th class="ps-4">ID</th>
+            <th>Empresa</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (prov of proveedores(); track prov.id) {
+            <tr>
+              <td class="ps-4 fw-bold text-muted">#{{ prov.id }}</td>
+              <td class="fw-bold">{{ prov.empresa }}</td>
+              <td><a href="mailto:{{prov.email_contacto}}" class="text-decoration-none">{{ prov.email_contacto }}</a></td>
+              <td>{{ prov.telefono || 'N/A' }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

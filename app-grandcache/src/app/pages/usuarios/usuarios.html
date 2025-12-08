@@ -1,1 +1,114 @@
-<p>usuarios works!</p>
+<div class="container fade-in">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold text-dark">Administracion de Usuarios</h2>
+    <span class="badge bg-primary rounded-pill">{{ usuarios().length }} Registrados</span>
+  </div>
+
+  <div class="card shadow-sm border-0 mb-5">
+    <div class="card-header bg-white border-bottom py-3">
+      <h5 class="card-title mb-0 text-primary fw-bold">
+        <i class="bi bi-person-plus-fill me-2"></i>Nuevo Usuario
+      </h5>
+    </div>
+    <div class="card-body p-4">
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div class="row g-3">
+
+          <div class="col-md-6">
+            <label class="form-label small text-muted fw-bold">Nombre Completo</label>
+            <input type="text" class="form-control" name="nombre_completo"
+                   [(ngModel)]="model.nombre_completo" required placeholder="Ej: Juan Pérez">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label small text-muted fw-bold">Usuario de Sistema</label>
+            <input type="text" class="form-control" name="nombre_usuario"
+                   [(ngModel)]="model.nombre_usuario" required placeholder="Ej: jperez">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label small text-muted fw-bold">Contraseña</label>
+            <input type="password" class="form-control" name="password"
+                   [(ngModel)]="model.password" required placeholder="******">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label small text-muted fw-bold">Rol</label>
+            <select class="form-select" name="rol" [(ngModel)]="model.rol">
+              <option value="empleado">Empleado</option>
+              <option value="admin">Administrador</option>
+            </select>
+          </div>
+
+          <div class="col-md-2 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary w-100 fw-bold" [disabled]="f.invalid">
+              Guardar
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <h4 class="mb-3 fw-bold text-secondary">Directorio de Personal</h4>
+
+  @if (cargando()) {
+    <div class="text-center py-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+      <p class="mt-2 text-muted">Cargando datos...</p>
+    </div>
+  }
+
+  @if (!cargando() && usuarios().length === 0) {
+    <div class="alert alert-warning" role="alert">
+      No hay usuarios registrados aún. ¡Sé el primero!
+    </div>
+  }
+
+  @if (!cargando() && usuarios().length > 0) {
+    <div class="table-responsive shadow-sm rounded-3">
+      <table class="table table-hover align-middle mb-0 bg-white">
+        <thead class="bg-light">
+          <tr>
+            <th class="py-3 ps-4">ID</th>
+            <th class="py-3">Nombre</th>
+            <th class="py-3">Usuario</th>
+            <th class="py-3">Rol</th>
+            <th class="py-3 text-end pe-4">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (user of usuarios(); track user.id) {
+            <tr>
+              <td class="ps-4 fw-bold text-muted">#{{ user.id }}</td>
+              <td>
+                <div class="d-flex align-items-center">
+                  <div class="avatar-circle me-2 bg-light text-primary fw-bold d-flex justify-content-center align-items-center" style="width: 35px; height: 35px; border-radius: 50%;">
+                    {{ user.nombre_completo.charAt(0) }}
+                  </div>
+                  {{ user.nombre_completo }}
+                </div>
+              </td>
+              <td><span class="badge bg-secondary bg-opacity-10 text-secondary">{{ user.nombre_usuario }}</span></td>
+              <td>
+                @if (user.rol === 'admin') {
+                  <span class="badge bg-success">Admin</span>
+                } @else {
+                  <span class="badge bg-info text-dark">Empleado</span>
+                }
+              </td>
+              <td class="text-end pe-4">
+                <button class="btn btn-sm btn-outline-danger border-0">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

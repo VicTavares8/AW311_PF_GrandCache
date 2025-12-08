@@ -1,1 +1,68 @@
-<p>categorias works!</p>
+<div class="container fade-in">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold text-dark">Gestión de Categorías</h3>
+    <span class="badge bg-success rounded-pill">{{ categorias().length }} Activas</span>
+  </div>
+
+  <div class="card shadow-sm border-0 mb-5">
+    <div class="card-header bg-white border-bottom py-3">
+      <h5 class="card-title mb-0 text-success fw-bold">
+        <i class="bi bi-tag-fill me-2"></i>Nueva Categoría
+      </h5>
+    </div>
+    <div class="card-body p-4">
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div class="row g-3">
+
+          <div class="col-md-5">
+            <label class="form-label fw-bold small text-muted">Nombre Categoría</label>
+            <input type="text" class="form-control" name="nombre"
+                   [(ngModel)]="model.nombre" required placeholder="Ej: Laptops Gamer">
+          </div>
+
+          <div class="col-md-5">
+            <label class="form-label fw-bold small text-muted">Descripción</label>
+            <input type="text" class="form-control" name="descripcion"
+                   [(ngModel)]="model.descripcion" placeholder="Ej: Equipos de alto rendimiento">
+          </div>
+
+          <div class="col-md-2 d-flex align-items-end">
+            <button type="submit" class="btn btn-success w-100 fw-bold" [disabled]="f.invalid">
+              Guardar
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <h4 class="mb-3 fw-bold text-secondary">Catálogo Actual</h4>
+
+  @if (cargando()) {
+    <div class="alert alert-light text-center">Cargando categorías...</div>
+  }
+
+  @if (!cargando() && categorias().length > 0) {
+    <div class="table-responsive shadow-sm rounded-3">
+      <table class="table table-hover align-middle mb-0 bg-white">
+        <thead class="bg-light">
+          <tr>
+            <th class="ps-4">ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (cat of categorias(); track cat.id) {
+            <tr>
+              <td class="ps-4 fw-bold text-muted">#{{ cat.id }}</td>
+              <td><span class="badge bg-success bg-opacity-10 text-success fs-6">{{ cat.nombre }}</span></td>
+              <td class="text-muted">{{ cat.descripcion }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

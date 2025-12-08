@@ -1,4 +1,50 @@
-<h1>PRUEBA DE ADMINISTRACIÓN</h1>
-<p>Aquí podrás crear Usuarios, Categorías y Proveedores.</p>
-<hr>
-<router-outlet></router-outlet>
+<div class="container mt-4 fade-in">
+
+  <div class="text-center mb-4">
+    <h2 class="fw-bold text-dark">Panel de Administración</h2>
+    <p class="text-muted">Gestiona los catálogos y operaciones del sistema</p>
+  </div>
+
+  <div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-white border-bottom-0 pt-3 px-3">
+      <ul class="nav nav-tabs card-header-tabs justify-content-center">
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="usuarios" routerLinkActive="active">
+            <i class="bi bi-people-fill me-2"></i>Usuarios
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="categorias" routerLinkActive="active">
+            <i class="bi bi-tags-fill me-2"></i>Categorías
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="proveedores" routerLinkActive="active">
+            <i class="bi bi-truck me-2"></i>Proveedores
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="nuevo-producto" routerLinkActive="active">
+            <i class="bi bi-box-seam-fill me-2"></i>Alta Producto
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="movimientos" routerLinkActive="active">
+            <i class="bi bi-arrow-left-right me-2"></i>Movimientos
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+
+  <div class="admin-content">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>

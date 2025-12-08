@@ -1,1 +1,75 @@
-<p>producto-form works!</p>
+<div class="container fade-in">
+
+  <div class="card shadow-sm border-0 mb-5">
+    <div class="card-header bg-white border-bottom py-3">
+      <h5 class="card-title mb-0 text-primary fw-bold">
+        <i class="bi bi-box-seam-fill me-2"></i>Alta de Nuevo Producto
+      </h5>
+    </div>
+
+    <div class="card-body p-4">
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div class="row g-3">
+
+          <div class="col-md-6">
+            <label class="form-label fw-bold small text-muted">Nombre del Producto</label>
+            <input type="text" class="form-control" name="nombre"
+                   [(ngModel)]="model.nombre" required placeholder="Ej: Monitor LED 24p">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label fw-bold small text-muted">Descripción Corta</label>
+            <input type="text" class="form-control" name="descripcion"
+                   [(ngModel)]="model.descripcion" placeholder="Ej: Full HD con HDMI">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label fw-bold small text-muted">Categoría</label>
+            <select class="form-select" name="categoria_id" [(ngModel)]="model.categoria_id" required>
+              <option [value]="0" disabled>Selecciona una opción...</option>
+              @for (cat of categorias(); track cat.id) {
+                <option [value]="cat.id">{{ cat.nombre }}</option>
+              }
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label fw-bold small text-muted">Proveedor</label>
+            <select class="form-select" name="proveedor_id" [(ngModel)]="model.proveedor_id" required>
+              <option [value]="0" disabled>Selecciona una opción...</option>
+              @for (prov of proveedores(); track prov.id) {
+                <option [value]="prov.id">{{ prov.empresa }}</option>
+              }
+            </select>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label fw-bold small text-muted">Precio ($)</label>
+            <input type="number" class="form-control" name="precio"
+                   [(ngModel)]="model.precio" required min="1">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label fw-bold small text-muted">Stock Inicial</label>
+            <input type="number" class="form-control" name="stock"
+                   [(ngModel)]="model.stock" required min="0">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label fw-bold small text-muted">Stock Mínimo (Alerta)</label>
+            <input type="number" class="form-control" name="stock_min"
+                   [(ngModel)]="model.stock_min" required min="1">
+          </div>
+
+          <div class="col-12 mt-4">
+            <button type="submit" class="btn btn-primary w-100 fw-bold p-2" [disabled]="f.invalid">
+              <i class="bi bi-save me-2"></i>Registrar Producto
+            </button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
