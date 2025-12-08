@@ -1,0 +1,45 @@
+// Animación de entrada
+.fade-in {
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+//carrusel
+.hero-img {
+  height: 350px;
+  object-fit: cover;
+  filter: brightness(0.7);
+}
+
+//texto sobre carrusel
+.glass-caption {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  bottom: 20%;
+}
+
+//efecto glass
+.glass-card {
+  background: rgba(255, 255, 255, 0.8); // Blanco semitransparente
+  backdrop-filter: blur(12px); // El desenfoque detrás
+  border-radius: 16px; // Bordes muy redondeados
+  border: 1px solid rgba(255, 255, 255, 0.6); // Borde brillante sutil
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05); // Sombra suave
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.95);
+  }
+}
+
+.icon-box {
+  width: 50px;
+  height: 50px;
+}
