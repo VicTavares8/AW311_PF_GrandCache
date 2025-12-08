@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Api } from '../../services/api';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartData, ChartType, ChartOptions } from 'chart.js';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, BaseChartDirective],
+  imports: [CommonModule, BaseChartDirective, RouterLink],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })

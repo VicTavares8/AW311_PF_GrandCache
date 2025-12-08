@@ -43,3 +43,11 @@
   width: 50px;
   height: 50px;
 }
+
+.table {
+  td {
+    .d-flex {
+      gap: 1rem;
+    }
+  }
+}
