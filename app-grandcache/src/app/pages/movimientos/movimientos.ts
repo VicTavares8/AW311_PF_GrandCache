@@ -22,9 +22,9 @@ export class Movimientos implements OnInit {
   //modelo del formulario
   model: Movimiento = {
     id_producto: 0,
-    tipo: 'IN', // 'IN' por defecto para agilizar entradas
+    tipo: 'IN',
     cantidad: 1,
-    id_usuario: 1 // IMPORTANTE: Temporalmente fijo en 1 (Vic Admin)
+    id_usuario: 1
   };
 
   ngOnInit(): void {

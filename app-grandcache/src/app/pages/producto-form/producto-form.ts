@@ -51,18 +51,14 @@ export class ProductoForm implements OnInit {
   }
 
   //carga de datos de un producto existente
-  // Carga de datos de un producto existente
   cargarProducto(id: number) {
     this.api.get(`productos/${id}`).subscribe({
       next: (data: any) => {
-        console.log("Datos recibidos de la API:", data); // <--- Mira esto en la consola (F12)
+        console.log("Datos recibidos de la API:", data);
 
-        // === CORRECCIÓN DE SEGURIDAD ===
-        // Si el backend devuelve un Array (ej: [{...}]), tomamos la posición 0
         if (Array.isArray(data) && data.length > 0) {
             this.model = data[0];
         } else {
-            // Si ya viene como objeto directo
             this.model = data;
         }
       },
