@@ -1,0 +1,29 @@
+$emerald: #059669;
+$bg-light: #F0FDF4;
+
+.login-container {
+  min-height: 100vh;
+}
+
+.text-emerald { color: $emerald !important; }
+.bg-emerald-light { background-color: rgba($emerald, 0.1); }
+.text-teal { color: #059396; }
+
+.btn-emerald {
+  background-color: $emerald;
+  border-color: $emerald;
+  color: white;
+  transition: all 0.3s;
+  &:hover {
+    background-color: darken($emerald, 5%);
+    transform: translateY(-2px);
+  }
+}
+
+.input-group-text {
+  color: $emerald;
+}
+.form-control:focus {
+  box-shadow: none;
+  border-color: #ced4da;
+}
