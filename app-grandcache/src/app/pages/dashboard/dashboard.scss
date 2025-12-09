@@ -1,3 +1,15 @@
+.carousel-caption h2 {
+  font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 4px 8px rgba(0,0,0,0.5);
+}
+
+.carousl-item {
+  background-attachment: fixed;
+}
+
 // Animación de entrada
 .fade-in {
   animation: fadeIn 0.8s ease-out;
