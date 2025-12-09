@@ -2,12 +2,12 @@
 
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h3 class="fw-bold text-dark">Administración de Categorías</h3>
-    <span class="badge bg-success rounded-pill">{{ categorias().length }} Activas</span>
+    <span class="badge bg-success rounded-pill" style="background-color: #059605 !important;">{{ categorias().length }} Activas</span>
   </div>
 
   <div class="card shadow-sm border-0 mb-5">
     <div class="card-header bg-white border-bottom py-3">
-      <h5 class="card-title mb-0 text-success fw-bold">
+      <h5 class="card-title mb-0 text-success fw-bold" style="color: #059605 !important;">
         <i class="bi bi-tag-fill me-2"></i>Nueva Categoría
       </h5>
     </div>
@@ -28,7 +28,7 @@
           </div>
 
           <div class="col-md-2 d-flex align-items-end">
-            <button type="submit" class="btn btn-success w-100 fw-bold" [disabled]="f.invalid">
+            <button type="submit" class="btn btn-success w-100 fw-bold" [disabled]="f.invalid" style="background-color: #059605 !important;">
               Guardar
             </button>
           </div>

@@ -2,12 +2,12 @@
 
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h3 class="fw-bold text-dark">Administración de Proveedores</h3>
-    <span class="badge bg-info text-dark rounded-pill">{{ proveedores().length }} Registrados</span>
+    <span class="badge bg-info text-dark rounded-pill" style="background-color: #056596 !important; color: white !important;">{{ proveedores().length }} Registrados</span>
   </div>
 
   <div class="card shadow-sm border-0 mb-5">
     <div class="card-header bg-white border-bottom py-3">
-      <h5 class="card-title mb-0 text-info fw-bold">
+      <h5 class="card-title mb-0 text-info fw-bold" style="color: #056596 !important;">
         <i class="bi bi-truck me-2"></i>Nuevo Proveedor
       </h5>
     </div>
@@ -34,7 +34,7 @@
           </div>
 
           <div class="col-md-2 d-flex align-items-end">
-            <button type="submit" class="btn btn-info w-100 fw-bold text-white" [disabled]="f.invalid">
+            <button type="submit" class="btn btn-info w-100 fw-bold text-white" [disabled]="f.invalid" style="background-color: #056596 !important;">
               Guardar
             </button>
           </div>
