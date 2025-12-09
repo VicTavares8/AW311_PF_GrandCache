@@ -20,15 +20,15 @@
     padding: 1rem 1.5rem;
 
     &:hover {
-      color: #0d6efd;
+      color: #059669; // Cambio a verde esmeralda
       background-color: transparent;
       border-color: transparent;
     }
 
     &.active {
-      color: #0d6efd;
+      color: #059669; // Cambio a verde esmeralda
       background-color: transparent;
-      border-bottom: 3px solid #0d6efd;
+      border-bottom: 3px solid #059669; // Línea inferior verde esmeralda
       font-weight: bold;
     }
 

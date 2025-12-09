@@ -13,10 +13,10 @@
       <p class="text-muted small">Vista global de existencias</p>
     </div>
     <div class="d-flex gap-2">
-      <button class="btn btn-outline-primary" (click)="cargarInventario()">
+      <button class="btn btn-outline-emerald" (click)="cargarInventario()">
         <i class="bi bi-arrow-clockwise me-1"></i>Actualizar
       </button>
-      <button class="btn btn-primary" routerLink="/administracion/nuevo-producto">
+      <button class="btn btn-emerald" routerLink="/administracion/nuevo-producto">
         <i class="bi bi-plus-lg me-1"></i>Nuevo Producto
       </button>
     </div>
@@ -30,7 +30,7 @@
   }
 
   @if (!cargando() && productos().length > 0) {
-    <div class="card shadow-sm border-0">
+    <div class="glass-card">
       <div class="table-responsive">
         <table class="table table-hover align-middle mb-0">
 

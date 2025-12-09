@@ -48,3 +48,59 @@
     }
   }
 }
+
+//definir color de botones
+$emerald: #059669;
+
+.btn-emerald {
+  background-color: $emerald;
+  border-color: $emerald;
+  color: white;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #047857;
+    border-color: #047857;
+    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+  }
+}
+
+.btn-outline-emerald {
+  color: $emerald;
+  border-color: $emerald;
+  background-color: transparent;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: $emerald;
+    color: white;
+    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2);
+  }
+}
+
+.glass-card {
+  background: linear-gradient(
+    145deg,
+    rgba(240, 252, 240, 0.85) 0%,
+    rgba(240, 252, 240, 0.4) 100%
+  );
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.95);
+  border-left: 1px solid rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  border-right: 1px solid rgba(255, 255, 255, 0.4);
+
+  border-radius: 16px;
+  overflow: hidden;
+
+  box-shadow: 0 8px 32px 0 rgba(5, 150, 105, 0.08);
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px 0 rgba(5, 150, 105, 0.15);
+  }
+}
