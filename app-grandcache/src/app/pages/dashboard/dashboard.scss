@@ -1,4 +1,4 @@
-.carousel-caption h2 {
+.carousel-caption h1 {
   font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -6,9 +6,6 @@
       text-shadow: 0 4px 8px rgba(0,0,0,0.5);
 }
 
-.carousl-item {
-  background-attachment: fixed;
-}
 
 // Animación de entrada
 .fade-in {
@@ -37,17 +34,38 @@
 
 //efecto glass
 .glass-card {
-  background: rgba(255, 255, 255, 0.8); // Blanco semitransparente
-  backdrop-filter: blur(12px); // El desenfoque detrás
-  border-radius: 16px; // Bordes muy redondeados
-  border: 1px solid rgba(255, 255, 255, 0.6); // Borde brillante sutil
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05); // Sombra suave
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  // 1. EL FONDO: Usamos tu #F0FDF4 (240, 253, 244)
+  // Arriba a la izquierda es más sólido (85%), abajo a la derecha es más transparente (30%)
+  background: linear-gradient(145deg,
+      rgba(240, 253, 244, 0.85) 0%,
+      rgba(240, 253, 244, 0.3) 100%);
+
+  // 2. EL EFECTO FROSTED (Escarcha)
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+
+  // 3. EL BORDE "CRISTAL CORTADO" (Clave para que se note)
+  // Borde blanco sólido arriba/izquierda para simular luz
+  border-top: 1px solid rgba(255, 255, 255, 0.9);
+  border-left: 1px solid rgba(255, 255, 255, 0.9);
+  // Borde sutil abajo/derecha
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  border-right: 1px solid rgba(255, 255, 255, 0.4);
+
+  border-radius: 16px;
+
+  // 4. LA SOMBRA (Lift)
+  // Usamos un verde más oscuro en la sombra para que la tarjeta "flote"
+  box-shadow: 0 8px 32px 0 rgba(31, 160, 100, 0.15);
+
+  transition: all 0.3s ease-in-out;
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-    background: rgba(255, 255, 255, 0.95);
+    // Al pasar el mouse, hacemos el vidrio un poco más opaco para leer mejor
+    background: rgba(240, 253, 244, 0.95);
+    box-shadow: 0 15px 40px 0 rgba(31, 160, 100, 0.25);
+    border-color: rgba(255, 255, 255, 1);
   }
 }
 
