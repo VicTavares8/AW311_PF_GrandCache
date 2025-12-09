@@ -3,7 +3,8 @@
   <div class="card shadow-sm border-0 mb-5">
     <div class="card-header bg-white border-bottom py-3">
       <h5 class="card-title mb-0 text-primary fw-bold">
-        <i class="bi bi-box-seam-fill me-2"></i>Alta de Nuevo Producto
+        <i class="bi bi-box-seam-fill me-2"></i>
+        {{ idProducto ? 'Editar Producto' : 'Alta de Nuevo Producto' }}
       </h5>
     </div>
 
@@ -50,9 +51,13 @@
           </div>
 
           <div class="col-md-4">
-            <label class="form-label fw-bold small text-muted">Stock Inicial</label>
+            <label class="form-label fw-bold small text-muted">
+              Stock Inicial
+              @if(idProducto) { <span class="text-danger small">(Usar módulo E/S)</span> }
+            </label>
             <input type="number" class="form-control" name="stock"
-                   [(ngModel)]="model.stock" required min="0">
+                   [(ngModel)]="model.stock" required min="0"
+                   [disabled]="idProducto !== null">
           </div>
 
           <div class="col-md-4">
@@ -63,7 +68,8 @@
 
           <div class="col-12 mt-4">
             <button type="submit" class="btn btn-primary w-100 fw-bold p-2" [disabled]="f.invalid">
-              <i class="bi bi-save me-2"></i>Registrar Producto
+              <i class="bi bi-save me-2"></i>
+              {{ idProducto ? 'Guardar Cambios' : 'Registrar Producto' }}
             </button>
           </div>
 

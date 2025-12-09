@@ -1,5 +1,6 @@
 const db = require('../db');
 
+// 1. OBTENER TODOS
 exports.getProductos = async (req, res) => {
     try {
         const sql = `
@@ -16,6 +17,25 @@ exports.getProductos = async (req, res) => {
     }
 };
 
+// 2. OBTENER UNO POR ID (Corregido)
+exports.getProducto = async (req, res) => {
+    try {
+        const { id } = req.params;
+        // Corregido: Usamos 'db' en lugar de 'pool'
+        const [rows] = await db.query('SELECT * FROM productos WHERE id = ?', [id]);
+
+        if (rows.length <= 0) {
+            return res.status(404).json({ message: 'Producto no encontrado' });
+        }
+
+        res.json(rows[0]);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Error en el servidor' });
+    }
+};
+
+// 3. CREAR NUEVO
 exports.createProducto = async (req, res) => {
     const { nombre, descripcion, precio, stock, stock_min, imagen_url, categoria_id, proveedor_id } = req.body;
 
@@ -32,5 +52,36 @@ exports.createProducto = async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Error al crear producto' });
+    }
+};
+
+// 4. ACTUALIZAR (Agregado para que funcione el botón 'Guardar Cambios')
+exports.updateProducto = async (req, res) => {
+    const { id } = req.params;
+    const { nombre, descripcion, precio, stock, stock_min, imagen_url, categoria_id, proveedor_id } = req.body;
+
+    try {
+        const [result] = await db.query(
+            `UPDATE productos SET
+            nombre = ?,
+            descripcion = ?,
+            precio = ?,
+            stock = ?,
+            stock_min = ?,
+            imagen_url = ?,
+            categoria_id = ?,
+            proveedor_id = ?
+            WHERE id = ?`,
+            [nombre, descripcion, precio, stock, stock_min, imagen_url, categoria_id, proveedor_id, id]
+        );
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Producto no encontrado' });
+        }
+
+        res.json({ message: 'Producto actualizado correctamente' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error al actualizar producto' });
     }
 };

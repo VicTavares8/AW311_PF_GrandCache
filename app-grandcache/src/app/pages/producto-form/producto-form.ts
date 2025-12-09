@@ -2,6 +2,7 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Api } from '../../services/api';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Producto } from '../../models/producto.model';
 import { Categoria } from '../../models/categoria.model';
 import { Proveedor } from '../../models/proveedor.model';
@@ -15,9 +16,14 @@ import { Proveedor } from '../../models/proveedor.model';
 })
 export class ProductoForm implements OnInit {
   private api = inject(Api);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
   categorias = signal<Categoria[]>([]);
   proveedores = signal<Proveedor[]>([]);
+
+  //para controlar si es POST o PATCH
+  idProducto: number | null = null;
 
   //modelo del formulario
   model: Producto = {
@@ -26,12 +32,42 @@ export class ProductoForm implements OnInit {
     precio: 0,
     stock: 0,
     stock_min: 5,
-    categoria_id: 0, // Se llenará con el select
-    proveedor_id: 0  // Se llenará con el select
+    categoria_id: 0,
+    proveedor_id: 0
   };
 
   ngOnInit(): void {
     this.cargarCatalogos();
+
+    //leer si se va a actualizar
+    this.route.queryParams.subscribe((params) => {
+      const id = params['id'];
+      if (id) {
+        console.log("ID detectado:", id);
+        this.idProducto = +id;
+        this.cargarProducto(this.idProducto);
+      }
+    });
+  }
+
+  //carga de datos de un producto existente
+  // Carga de datos de un producto existente
+  cargarProducto(id: number) {
+    this.api.get(`productos/${id}`).subscribe({
+      next: (data: any) => {
+        console.log("Datos recibidos de la API:", data); // <--- Mira esto en la consola (F12)
+
+        // === CORRECCIÓN DE SEGURIDAD ===
+        // Si el backend devuelve un Array (ej: [{...}]), tomamos la posición 0
+        if (Array.isArray(data) && data.length > 0) {
+            this.model = data[0];
+        } else {
+            // Si ya viene como objeto directo
+            this.model = data;
+        }
+      },
+      error: (err) => console.error('Error al cargar producto', err)
+    });
   }
 
   //GET
@@ -45,7 +81,7 @@ export class ProductoForm implements OnInit {
     });
   }
 
-  //POST
+  //POST y PATCH
   onSubmit(form: NgForm) {
     if (form.invalid) return;
 
@@ -55,21 +91,39 @@ export class ProductoForm implements OnInit {
       return;
     }
 
-    this.api.post('productos', this.model).subscribe({
-      next: (res) => {
-        alert('Producto registrado exitosamente');
-        form.resetForm();
-        //resetear valores numéricos
-        this.model = {
-          nombre: '', descripcion: '', precio: 0,
-          stock: 0, stock_min: 5,
-          categoria_id: 0, proveedor_id: 0
-        };
-      },
-      error: (err) => {
-        console.error(err);
-        alert('Error al guardar producto');
-      }
-    });
+    //se decide si es UPDATE O CREATE
+    if (this.idProducto) {
+      // === MODO EDICIÓN (PUT) ===
+      this.api.put(`productos/${this.idProducto}`, this.model).subscribe({
+        next: (res) => {
+          alert('Producto actualizado exitosamente');
+          //no se resetea el formulario
+          this.router.navigate(['/inventario']);
+        },
+        error: (err) => {
+          console.error(err);
+          alert('Error al actualizar producto');
+        }
+      });
+
+    } else {
+      //POST
+      this.api.post('productos', this.model).subscribe({
+        next: (res) => {
+          alert('Producto registrado exitosamente');
+          form.resetForm();
+          //resetear valores numéricos
+          this.model = {
+            nombre: '', descripcion: '', precio: 0,
+            stock: 0, stock_min: 5,
+            categoria_id: 0, proveedor_id: 0
+          };
+        },
+        error: (err) => {
+          console.error(err);
+          alert('Error al guardar producto');
+        }
+      });
+    }
   }
 }

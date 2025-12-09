@@ -87,12 +87,15 @@
                 </td>
 
                 <td class="text-end pe-4">
-                  <button class="btn btn-sm btn-light text-muted me-1" title="Ver detalle">
+                  <button class="btn btn-sm btn-light text-muted me-1" [routerLink]="['/administracion/nuevo-producto']"
+                    [queryParams]="{ id: prod.id }" title="Editar Producto">
                     <i class="bi bi-eye"></i>
                   </button>
-                  <button class="btn btn-sm btn-outline-primary" routerLink="/creacion/movimientos" title="Registrar E/S">
+                  <button class="btn btn-sm btn-light text-muted me-1" [routerLink]="['/administracion/movimientos']"
+                    title="Agregar Movimiento">
                     <i class="bi bi-arrow-left-right"></i>
                   </button>
+
                 </td>
 
               </tr>
